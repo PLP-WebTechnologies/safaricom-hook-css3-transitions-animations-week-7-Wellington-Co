@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neton - Buy Airtime</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        header .logo h1 {
+            margin-left: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+            color: #FFD700;
+            border-radius: 8px;
+        }
+
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .content {
+            display: flex;
+            text-align: center;
+            background-color: #007BFF;
+            width: 100%;
+            margin: 0;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .text-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .text-content p {
+            margin-bottom: 1rem;
+        }
+
+        #airtime {
+            background-color: #f4f4f4;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #airtime h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        input[type="tel"], input[type="number"] {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        input[type="tel"]:focus, input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        button:active {
+            background-color: #1e7e34;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .animate {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spinner 1.5s linear infinite;
+        }
+
+        @keyframes spinner {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        footer .social-media {
+            margin-bottom: 10px;
+        }
+
+        footer .social-media a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        footer .social-media a:hover {
+            color: #FFD700;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            
+            footer {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .content {
+                display: flex;
+            }
+        }
+        .cta {
+            position: relative;
+            display: inline-block;
+            align-self: center;
+            text-align: center;
+            justify-self: center;
+        }
+        #cta{
+            padding: 12px;
+            background-color: #6A0136;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: bounce 0.6s ease infinite;
+        }
+
+        #cta:after{
+            content:'';
+            position: absolute; /* Position absolute to place it below the button */
+            left: 50%; /* Center the arrow horizontally */
+            bottom: -10px; /* Position it below the button */
+            transform: translateX(-50%); /* Center the arrow */
+            width: 0; /* No width */
+            height: 0; /* No height */
+            border-left: 10px solid transparent; /* Left side of the arrow */
+            border-right: 10px solid transparent; /* Right side of the arrow */
+             border-top: 10px solid #6A0136;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                     transform: translateY(0);
+                     box-shadow: 0 0 10px #6A0136, 0 0 20px #6A0136;
+            }
+            50% {
+                transform: translateY(-10px);
+                box-shadow: 0 0 20px #6A0136, 0 0 30px #6A0136;
+            }   
+        }        
+        #animateButton{
+            margin-top: 15px;
+        }
+        #airtime h2{
+            border-bottom: 2px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Neton Logo" />
+            <h1>Neton</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content">
+            <div class="text-content">
+                <h2>Buy Airtime Anytime</h2>
+                <p>Neton offers you the best deals on airtime, data bundles, and SMS bundles. Stay connected with friends and family with affordable options.</p>
+                <p>Our platform is easy to use and available on all devices, making it simple to buy airtime wherever you are. Start saving today!</p>
+            </div>
+        </section>
+        <div class="cta">
+            <button id="cta">Buy airtime for all Networks</button>
+        </div>
+
+        <section id="airtime">
+            <h2>Buy Airtime</h2>
+            <form action="your-backend-url" method="POST" id="airtimeForm">
+                <label for="mpesaNumber">Mpesa Number:</label>
+                <input type="tel" id="mpesaNumber" name="mpesaNumber" required />
+        
+                <label for="recipientNumber">Number to Receive Airtime:</label>
+                <input type="tel" id="recipientNumber" name="recipientNumber" required />
+        
+                <label for="amount">Airtime Amount:</label>
+                <input type="number" id="amount" name="amount" required />
+        
+                <button type="submit" id="buyButton">Buy</button>
+            </form>
+        </section>
+      <!---Button that triggers animation when clicked-->
+        <button id="animateButton">About Us</button>
+        <div id="animatedElement" class="hidden">Neton is an all-networks airtime selling platform that offers affordable and seamless solutions for
+             purchasing airtime, data bundles, and SMS bundles. The service is designed to work across multiple networks, providing users with the
+              flexibility to top-up on any major network, anytime, anywhere. Neton’s platform is user-friendly, ensuring a smooth transaction process, 
+              with support for mobile payments like M-Pesa. With competitive rates and an easy-to-use interface, Neton aims to keep users connected 
+              at the best value, offering convenience, speed, and reliability in one place.</div>
+
+        <div class="spinner"></div>
+    </main>
+
+    <footer>
+        <div class="social-media">
+            <a href="https://wa.me/254743714202" target="_blank">Whatsapp</a>
+            <a href="https://www.instagram.com/itswellingtone/" target="_blank">Instagram</a>
+        </div>
+        <p>&copy; 2025 Neton. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript functions to handle interactivity
+        function toggleAnimation(elementId) {
+            const element = document.getElementById(elementId);
+            element.classList.toggle('hidden');
+            element.classList.add('animate');
+        }
+
+        document.getElementById('animateButton').addEventListener('click', function() {
+            toggleAnimation('animatedElement');
+        });
+
+        // Example: Function to calculate the area of a rectangle
+        function calculateArea(length, width) {
+            return length * width;
+        }
+
+        // Example usage of area calculation
+        let area = calculateArea(5, 10);
+        console.log(`Area: ${area}`);
+
+        // Demonstrating scope (local vs global)
+        let globalVar = "I'm a global variable!";
+
+        function showLocalScope() {
+            let localVar = "I'm a local variable!";
+            console.log(globalVar); // Access global variable
+            console.log(localVar);  // Access local variable
+        }
+
+        showLocalScope();
+        console.log(globalVar);  // This works
+        // console.log(localVar); // This would throw an error
+    </script>
+</body>
+</html>
